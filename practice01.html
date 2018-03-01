@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery practice01</title>		
+</head>
+<body>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="practice01.js"></script>
+	<script>
+	var item=document.getElementsByClassName("item2");
+	//console.log(item);
+	$(function(){
+		var div = $('<div>mamiao</div>');
+		//console.log(div);     看俩者的区别，jquery是封装好的dom对象~~
+		//console.log($('div'));   
+		div.appendTo('body');
+
+	})
+	//第一种方式创建dom
+	$(function(){
+		var link = $('<a>',{
+		text:'baidu',
+		href:'http://www.baidu.com',
+		target:'_blank',
+		title:'_goto_baidu.com'
+	});
+		link.appendTo('body');
+	})
+	//第二种方式创建dom 暂时注销   //注意：这个href放在了最前面
+	var link2 = $('<a>baidu</a>').attr({
+		text:'baidu',
+		href:'http://www.baidu.com',
+		target:'_blank',
+		title:'_goto2_baidu.com'
+	});
+	link2.appendTo('body');
+
+	$(function(){
+
+		//attr  prop方法的用法~~~  data()的用法
+		//
+		//var img = document.getElementById("logo");
+		//var img = $("img");
+		//img.attributes;
+		//console.log(img.getAttribute('title'));   //返回的总是字符串
+		//console.log(img.title);
+		//img.setAttribute('title','another title');
+		// img.attr({
+		// 	title:'another title',
+		// 	alt:'test'
+		// });
+		// img.attr(
+		// 	'title',function(index,prev){
+		// 		console.log(prev);
+		// 		return prev;
+		// 	}
+		// );
+	})
+	
+	</script>
+	<div id="box1">
+		<div id="box2">
+			<div id="box3">
+				<p id="mood">阳光明媚</p>
+				<p id="sun">Sunrise</p>
+				<ul>	
+					<li class="item1">monday</li>
+					<li class="item2">tuesday</li>
+					<li class="item3">thirsday</li>
+					<li class="item4">tuesday</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<img src="#" id="logo" alt="click" class="logo" title="test"/>
+	
+</body>
+</html>
