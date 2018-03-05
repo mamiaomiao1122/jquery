@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>choice</title>
+	<style>
+		.box1{
+			width:50px;
+			height:50px;
+			background-color: pink;
+		}
+		.box2{
+			width:50px;
+			height:50px;
+			background-color: orange;
+		}
+		.red{
+			color:red;
+			/*background-color: red;*/
+		}
+		.heightLight{
+			padding: 10px;
+			border:1px solid pink;
+		}
+	</style>
+</head>
+<body>
+	<div class="box1" id="box1">box1</div>
+	<div class="box2" id="box2">box2</div>
+	<ul>
+		<li>0</li>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	</ul>
+	<div id="p"><div id="p-1">	<p>	点击触发事件 </p></div></div>
+	<div><input type="radio" value="nan" checked>nan
+	<input type="radio" value="nan" checked>nv</div>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="practice04.js"></script>
+	<script>
+
+	$(function(){
+		$("#box1").click(function(){
+		var box2 = $("#box2");
+		box2.width(box2.width()+10)   //如果写成10px，则报错
+		    .height(box2.height()+10);
+	});
+		var bx1 = document.querySelector('.box1,box2');
+		var bx2 = document.querySelectorAll('.box1');
+		console.log(bx1);console.log(bx2);
+	});
+
+//dom 0级事件，只支持一个事件处理函数 只会发生一次 后面覆盖前面的      但是会检查父元素的事件（事件冒泡）event.stopPropagation()  
+	//event.cancelBubble = true;会阻止冒泡
+		document.getElementById("box2").onclick=function(event){
+			event = event || window.event;
+			console.log("click");
+		}
+
+//dom 2级事件addEventListener(type，callback,useCapture)  最后一个参数false 只冒泡不捕获  true只捕获不冒泡
+		var ele = document.getElementById("box2");
+		ele.addEventListener('click',function(event){
+			event = event || window.event;
+			console.log("click me");
+		},false);
+		ele.addEventListener('click',function(event){
+			event = event || window.event;
+			console.log("click me2");
+		},false);
+//jquery事件
+   
+		$('p').on('click',null,null,function(event){
+			//console.log("me");
+		})
+		$('div').on('click','#p-1',null,function(event){
+			//console.log("me2");
+		})
+		$('div').on('click','#p-1',{today:'mon'},function(event){
+			//console.log("me2 %o",event.data);
+		})
+		 //事件委托（第二个参数） 委托给父元素
+		$('div').on('click','li',{today:'mon'},function(event){
+			console.log("me2 %o",$(this));
+		})
+		$('ul').on('click',function(event){
+			console.log("me2 %o",$(event.target));
+		})
+
+	</script>
+</body>
+</html>
